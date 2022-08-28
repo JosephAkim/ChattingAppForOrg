@@ -1,8 +1,10 @@
-package com.kim.chattingappfororg;
+package com.kim.chattingappfororg.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.kim.chattingappfororg.R;
 
 public class MainActivity extends AppCompatActivity {
 
