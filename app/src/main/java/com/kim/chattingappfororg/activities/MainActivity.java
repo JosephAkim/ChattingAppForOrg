@@ -6,6 +6,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.kim.chattingappfororg.adapters.RecentConversationsAdapter;
 import com.kim.chattingappfororg.databinding.ActivityMainBinding;
 
 import android.content.Intent;
@@ -16,25 +17,39 @@ import android.util.Base64;
 import android.widget.Toast;
 
 import com.kim.chattingappfororg.R;
+import com.kim.chattingappfororg.models.ChatMessage;
 import com.kim.chattingappfororg.utilities.Constants;
 import com.kim.chattingappfororg.utilities.PreferenceManager;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
     private PreferenceManager preferenceManager;
+    private List<ChatMessage> conversations;
+    private RecentConversationsAdapter conversationsAdapter;
+    private FirebaseFirestore database;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         preferenceManager = new PreferenceManager(getApplicationContext());
+        init();
         loadUserDetails();
         getToken();
         setListeners();
         setContentView(binding.getRoot());
+    }
+
+    private void init() {
+        conversations = new ArrayList<>();
+        conversationsAdapter = new RecentConversationsAdapter(conversations);
+        binding.conversationsRecyclerView.setAdapter(conversationsAdapter);
+        database = FirebaseFirestore.getInstance();
     }
 
     private void setListeners(){
