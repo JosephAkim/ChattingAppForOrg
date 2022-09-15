@@ -19,8 +19,6 @@ import android.os.Bundle;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Toast;
-
-import com.kim.chattingappfororg.R;
 import com.kim.chattingappfororg.listeners.ConversationListener;
 import com.kim.chattingappfororg.models.ChatMessage;
 import com.kim.chattingappfororg.models.User;
@@ -32,7 +30,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements ConversationListener {
+public class MainActivity extends BaseActivity implements ConversationListener {
 
     private ActivityMainBinding binding;
     private PreferenceManager preferenceManager;
